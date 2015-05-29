@@ -36,3 +36,8 @@ class window.App extends Backbone.Model
     else if playerScore == dealerScore
       @gameOver('split pot')
     else @gameOver('lose')
+
+  newGame: () ->
+    @initialize()
+    @set('inProgress', true)
+    @trigger "newHand"

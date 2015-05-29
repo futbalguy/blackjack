@@ -11,6 +11,10 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
+    @model.on('change:inProgress', () ->
+      @$('.hit-button') .prop("disabled",true)
+      @$('.stand-button') .prop("disabled",true)
+    , @)
 
   render: ->
     @$el.children().detach()

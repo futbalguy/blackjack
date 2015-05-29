@@ -11,6 +11,10 @@ class window.Hand extends Backbone.Collection
     @array
     @trigger "stand"
 
+  hitUntil17: ->
+    while @getMaxScore() < 17
+      @hit()
+
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
   , 0
@@ -36,5 +40,5 @@ class window.Hand extends Backbone.Collection
     else trueScores[0]
 
   checkIfBusted: () ->
-      playerScore = @scores()[0]
-      @trigger "bust" if playerScore > 21
+      score = @scores()[0]
+      @trigger "bust" if score > 21

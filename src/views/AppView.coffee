@@ -24,6 +24,7 @@ class window.AppView extends Backbone.View
     @model.on('gameOver', (result) ->
       @$('.hit-button') .prop("disabled",true)
       @$('.stand-button') .prop("disabled",true)
+      @showGameOverMessage(result)
     , @)
     #   if result == 'win'
 
@@ -97,6 +98,9 @@ class window.AppView extends Backbone.View
           context.model.get('dealerHand').cardArrived()
           @remove())
     , @)
+
+  showGameOverMessage: (result) ->
+    $('.app').append('<div class="gameOverMessage"><h1>YOU<br>'+result.toUpperCase()+'!</h1></div>')
 
 
   render: ->

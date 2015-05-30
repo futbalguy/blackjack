@@ -15,30 +15,36 @@ class window.AppView extends Backbone.View
 
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('playerHand').stand()
+    'click .stand-button': -> @handleStand()
     'click .deal-button': -> @model.newGame()
 
   initialize: ->
     @render()
 
-    @model.on('change:inProgress', () ->
-      @$('.hit-button') .prop("disabled",!@model.get('inProgress'))
-      @$('.stand-button') .prop("disabled",!@model.get('inProgress'))
-    , @)
-
     @model.on('gameOver', (result) ->
-      if result == 'win'
-        $('.player-hand-container .card').solitaireVictory()
-        $('.dealer-hand-container .card').solitaireVictory()
+      @$('.hit-button') .prop("disabled",true)
+      @$('.stand-button') .prop("disabled",true)
     , @)
+    #   if result == 'win'
+
+    #     $('.player-hand-container .card').solitaireVictory()
+    #     $('.dealer-hand-container .card').solitaireVictory()
+
 
     @model.on('newHand', () ->
       $('.solitaire-victory-clone').remove()
       @render()
       @addListeners()
+      @$('.hit-button') .prop("disabled",false)
+      @$('.stand-button') .prop("disabled",false)
     , @)
 
     @addListeners()
+
+  handleStand: =>
+    @$('.hit-button') .prop("disabled",true)
+    @$('.stand-button') .prop("disabled",true)
+    @model.get('playerHand').stand()
 
 
   addListeners: =>

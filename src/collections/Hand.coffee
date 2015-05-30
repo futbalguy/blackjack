@@ -8,8 +8,7 @@ class window.Hand extends Backbone.Collection
     nextCard = @deck.pop()
     nextCard.set('revealed', true)
     @add(nextCard)
-
-    @checkIfBusted()
+    # @checkIfBusted()
     nextCard
 
   stand: ->
@@ -17,12 +16,9 @@ class window.Hand extends Backbone.Collection
 
   cardArrived: ->
     @trigger "cardArrived"
+    @checkIfBusted()
     if @isDealer && @getMaxScore() < 17
       @hit()
-
-  # hitUntil17: ->
-  #   while @getMaxScore() < 17
-  #     @hit()
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -51,3 +47,4 @@ class window.Hand extends Backbone.Collection
   checkIfBusted: () ->
       score = @scores()[0]
       @trigger "bust" if score > 21
+      score > 21

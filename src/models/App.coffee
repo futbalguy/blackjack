@@ -28,8 +28,10 @@ class window.App extends Backbone.Model
 
   handleStand: () ->
     @get('dealerHand') .at(0).flip()
-    @get('dealerHand') .hit()
-    if @get('inProgress') then @checkScore()
+    if @get('dealerHand').getMaxScore() < 17
+      @get('dealerHand') .hit()
+    else
+      if @get('inProgress') then @checkScore()
 
   gameOver: (result) ->
     console.log result
@@ -53,6 +55,7 @@ class window.App extends Backbone.Model
 
 
 #call solitaire victory after dealer finishes hitting
-#tell player when they win or lose
+#disable hit buton after stand
+#tell player when they win or lose, then wait a second before solitairevictory
 #deck slide out on new game
 

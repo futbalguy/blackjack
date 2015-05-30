@@ -53,7 +53,3 @@ class window.App extends Backbone.Model
     @set('inProgress', true)
     @trigger "newHand"
 
-
-
-#deck slide out on new game
-

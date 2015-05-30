@@ -3,13 +3,28 @@ class window.DeckView extends Backbone.View
 
 
   initialize: ->
-    @render()
-    @collection.on 'add remove', => @render()
+    @render(true)
+    @collection.on 'remove', => @render(false)
 
-  render: ->
+  render: (showAnimation) ->
     @$el.children().detach()
-    @$el.append @collection.map (card,index) ->
-      card.set('revealed', false)
-      left = index * 5
-      new CardView(model: card).$el.css({'top':'0px','left',left})
-
+    if showAnimation
+      @$el.append @collection.map (card,index) ->
+        card.set('revealed', false)
+        cardView = new CardView(model: card)
+        cardView.$el.css(
+          'top':'0px',
+          'left':'0px'
+          )
+        left = index * 14
+        cardView.$el.animate(
+          'left':left
+          )
+    else
+      @$el.append @collection.map (card,index) ->
+        card.set('revealed', false)
+        cardView = new CardView(model: card)
+        cardView.$el.css(
+          'top':'0px',
+          'left':index * 14
+          )

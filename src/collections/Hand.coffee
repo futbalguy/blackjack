@@ -17,10 +17,12 @@ class window.Hand extends Backbone.Collection
 
   cardArrived: ->
     @trigger "cardArrived"
-
-  hitUntil17: ->
-    while @getMaxScore() < 17
+    if @isDealer && @getMaxScore() < 17
       @hit()
+
+  # hitUntil17: ->
+  #   while @getMaxScore() < 17
+  #     @hit()
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1

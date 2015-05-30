@@ -19,16 +19,35 @@ class window.AppView extends Backbone.View
       @$('.hit-button') .prop("disabled",!@model.get('inProgress'))
       @$('.stand-button') .prop("disabled",!@model.get('inProgress'))
     , @)
+
     @model.on('newHand', () ->
       @render()
     , @)
+
     @model.get('playerHand').on('willHit',() ->
       startLeftPos = $('.deck .card').last().offset().left
       startTopPos = $('.deck .card').last().offset().top
-      endLeftPos = $('.player-hand-container .card').last().offset().left + $('.player-hand-container .card').last().width()
+
+      endLeftPos = $('.player-hand-container .card').last().offset().left + $('.player-hand-container .card').width()
       endTopPos = $('.player-hand-container .card').last().offset().top
-      debugger
-    )
+
+      deck = @model.get('deck')
+      cardView = new CardView(model: deck.at(deck.length - 1))
+      @$el.append(cardView.el)
+      context = @
+      cardView.$el.css(
+        'position': 'absolute'
+        'top': startTopPos
+        'left' : startLeftPos
+        ).animate(
+        'top': endTopPos
+        'left' : endLeftPos
+        , 600
+        , "linear"
+        , () ->
+          context.model.get('playerHand').cardArrived()
+          @remove())
+    , @)
 
 
   render: ->

@@ -15,6 +15,9 @@ class window.Hand extends Backbone.Collection
     @array
     @trigger "stand"
 
+  cardArrived: ->
+    @trigger "cardArrived"
+
   hitUntil17: ->
     while @getMaxScore() < 17
       @hit()

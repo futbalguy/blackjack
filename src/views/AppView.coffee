@@ -26,10 +26,6 @@ class window.AppView extends Backbone.View
       @$('.stand-button') .prop("disabled",true)
       @showGameOverMessage(result)
     , @)
-    #   if result == 'win'
-
-    #     $('.player-hand-container .card').solitaireVictory()
-    #     $('.dealer-hand-container .card').solitaireVictory()
 
 
     @model.on('newHand', () ->
@@ -101,7 +97,15 @@ class window.AppView extends Backbone.View
 
   showGameOverMessage: (result) ->
     $('.app').append('<div class="gameOverMessage"><h1>YOU<br>'+result.toUpperCase()+'!</h1></div>')
-
+    if result == 'win'
+      setTimeout (->
+        $('.dealer-hand-container .card').solitaireVictory()
+        return
+      ), 1000
+      setTimeout (->
+        $('.player-hand-container .card').solitaireVictory()
+        return
+      ), 1000
 
   render: ->
     @$el.children().detach()

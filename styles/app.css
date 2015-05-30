@@ -74,7 +74,7 @@ body {
   border: black 2px solid;
   padding: 20px;
   border-radius: 10px;
-  background: #ddd;
+  background: rgba(230, 230, 230, .8);
 }
 
 .gameOverMessage h1 {

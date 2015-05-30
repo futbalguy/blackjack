@@ -12,6 +12,7 @@ class window.App extends Backbone.Model
     @get('playerHand') .on("bust", @handlePlayerBust, @)
     @get('dealerHand') .on("bust", @handleDealerBust,@)
     @get('playerHand') .on("stand", @handleStand,@)
+    @get('dealerHand') .on("checkScore", @checkScore,@)
     @dealCards()
 
   dealCards: () ->
@@ -54,8 +55,5 @@ class window.App extends Backbone.Model
 
 
 
-#call solitaire victory after dealer finishes hitting
-#disable hit buton after stand
-#tell player when they win or lose, then wait a second before solitairevictory
 #deck slide out on new game
 

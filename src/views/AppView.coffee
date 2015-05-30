@@ -1,11 +1,16 @@
 class window.AppView extends Backbone.View
+
+  className: 'app'
+
   template: _.template '
+    <div class="deck-container"></div>
+    <div class="dealer-hand-container"></div>
+    <div class="player-hand-container"></div>
+    <div class="buttons">
+    <button class="deal-button">Deal New Hand</button>
     <button class="hit-button">Hit</button>
     <button class="stand-button">Stand</button>
-    <button class="deal-button">Deal New Hand</button>
-    <div class="player-hand-container"></div>
-    <div class="dealer-hand-container"></div>
-    <div class="deck-container"></div>
+    </div>
   '
 
   events:
@@ -45,7 +50,7 @@ class window.AppView extends Backbone.View
 
       deck = @model.get('deck')
       cardView = new CardView(model: deck.at(deck.length - 1))
-      @$el.append(cardView.el)
+      $('body').append(cardView.el)
       context = @
       cardView.$el.css(
         'position': 'absolute'
@@ -70,7 +75,7 @@ class window.AppView extends Backbone.View
 
       deck = @model.get('deck')
       cardView = new CardView(model: deck.at(deck.length - 1))
-      @$el.append(cardView.el)
+      $('body').append(cardView.el)
       context = @
       cardView.$el.css(
         'position': 'absolute'

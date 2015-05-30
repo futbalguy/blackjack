@@ -45,7 +45,23 @@ table {
 
 /*END RESET*/
 
+body {
+  background-color:black;
+}
 
+.app {
+  margin: auto;
+  width: 800px;
+  height: 700px;
+  position: relative;
+  top: 30%;
+  transform: translateY(-30%);
+  border: #996633 15px solid;
+  padding: 50px 300px ;
+  border-radius: 400px;
+  /*background-color: lightgreen;*/
+  background: url('../img/table.jpg');
+}
 
 .card {
   float: left;
@@ -62,6 +78,8 @@ table {
 
 .hand {
   overflow: auto;
+  color: white;
+  padding: 30px;
 }
 
 .card-image {
@@ -71,15 +89,36 @@ table {
 
 .deck-container {
   overflow: hidden;
-  height:500px;
+  height:170px;
 }
 
 .deck {
   overflow: hidden;
-  height:500px;
+  height:100%;
   position: relative;
 }
 
 .deck .card {
   position: absolute;
+}
+
+.buttons {
+  width:100%;
+  height:40px;
+}
+
+.buttons button{
+  width:33%;
+  height:100%;
+  padding:10px;
+  font-size:20px;
+  border-radius:10px;
+  border: black 1px solid;
+}
+
+h2 {
+  font-size:22px;
+  padding:5px;
+  color:white;
+  font-family: sans-serif;
 }

@@ -15,6 +15,7 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
+
     @model.on('change:inProgress', () ->
       @$('.hit-button') .prop("disabled",!@model.get('inProgress'))
       @$('.stand-button') .prop("disabled",!@model.get('inProgress'))
@@ -22,8 +23,13 @@ class window.AppView extends Backbone.View
 
     @model.on('newHand', () ->
       @render()
+      @addListeners()
     , @)
 
+    @addListeners()
+
+
+  addListeners: =>
     @model.get('playerHand').on('willHit',() ->
       startLeftPos = $('.deck .card').last().offset().left
       startTopPos = $('.deck .card').last().offset().top
@@ -73,6 +79,7 @@ class window.AppView extends Backbone.View
           context.model.get('dealerHand').cardArrived()
           @remove())
     , @)
+
 
   render: ->
     @$el.children().detach()

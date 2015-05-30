@@ -8,7 +8,8 @@ class window.DeckView extends Backbone.View
 
   render: ->
     @$el.children().detach()
-    @$el.append @collection.map (card) ->
+    @$el.append @collection.map (card,index) ->
       card.set('revealed', false)
-      new CardView(model: card).$el
+      left = index * 5
+      new CardView(model: card).$el.css({'top':'20px','left',left})
 

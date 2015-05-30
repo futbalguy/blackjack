@@ -19,3 +19,18 @@
   width: 100%;
   height: auto;
 }
+
+.deck-container {
+  overflow: hidden;
+  height:500px;
+}
+
+.deck {
+  overflow: hidden;
+  height:500px;
+  position: relative;
+}
+
+.deck .card {
+  position: absolute;
+}

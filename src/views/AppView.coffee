@@ -21,7 +21,13 @@ class window.AppView extends Backbone.View
       @$('.stand-button') .prop("disabled",!@model.get('inProgress'))
     , @)
 
+    @model.on('gameOver', (result) ->
+      if result == 'win'
+        $('.player-hand-container .card').solitaireVictory();
+    , @)
+
     @model.on('newHand', () ->
+      $('.solitaire-victory-clone').remove()
       @render()
       @addListeners()
     , @)

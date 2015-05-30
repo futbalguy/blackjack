@@ -33,6 +33,7 @@ class window.App extends Backbone.Model
 
   gameOver: (result) ->
     console.log result
+    @trigger('gameOver', result)
     @set('inProgress', false)
 
   checkScore: () ->

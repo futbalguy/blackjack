@@ -12,6 +12,13 @@ class window.App extends Backbone.Model
     @get('playerHand') .on("bust", @handlePlayerBust, @)
     @get('dealerHand') .on("bust", @handleDealerBust,@)
     @get('playerHand') .on("stand", @handleStand,@)
+    @dealCards()
+
+  dealCards: () ->
+    @get('playerHand').hit()
+    @get('playerHand').hit()
+    @get('dealerHand').hit().flip()
+    @get('dealerHand').hit()
 
   handlePlayerBust: () ->
     @gameOver('lose')

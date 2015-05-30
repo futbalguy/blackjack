@@ -22,6 +22,13 @@ class window.AppView extends Backbone.View
     @model.on('newHand', () ->
       @render()
     , @)
+    @model.get('playerHand').on('willHit',() ->
+      startLeftPos = $('.deck .card').last().offset().left
+      startTopPos = $('.deck .card').last().offset().top
+      endLeftPos = $('.player-hand-container .card').last().offset().left + $('.player-hand-container .card').last().width()
+      endTopPos = $('.player-hand-container .card').last().offset().top
+      debugger
+    )
 
 
   render: ->

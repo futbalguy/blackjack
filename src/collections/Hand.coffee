@@ -4,10 +4,12 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
 
   hit: ->
+    @trigger('willHit')
     nextCard = @deck.pop()
     nextCard.set('revealed', true)
     @add(nextCard)
     @checkIfBusted()
+    nextCard
 
   stand: ->
     @array
@@ -35,7 +37,7 @@ class window.Hand extends Backbone.Collection
   getMaxScore: ->
     #returns highest possible score under 22
     trueScore = @reduce (score, card) ->
-      score + card.get 'value'
+      score + if card.get('revealed') then card.get 'value' else 0
     , 0
     trueScores = [trueScore, trueScore + 10 * @hasAce()]
     if trueScores[1] < 22 then trueScores[1]

@@ -23,7 +23,7 @@ class window.AppView extends Backbone.View
 
     @model.on('gameOver', (result) ->
       if result == 'win'
-        $('.player-hand-container .card').solitaireVictory();
+        $('.player-hand-container .card').solitaireVictory()
     , @)
 
     @model.on('newHand', () ->

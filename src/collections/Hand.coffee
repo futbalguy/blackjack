@@ -8,11 +8,11 @@ class window.Hand extends Backbone.Collection
     nextCard = @deck.pop()
     nextCard.set('revealed', true)
     @add(nextCard)
+
     @checkIfBusted()
     nextCard
 
   stand: ->
-    @array
     @trigger "stand"
 
   cardArrived: ->

@@ -28,7 +28,7 @@ class window.AppView extends Backbone.View
       startLeftPos = $('.deck .card').last().offset().left
       startTopPos = $('.deck .card').last().offset().top
 
-      endLeftPos = $('.player-hand-container .card').last().offset().left + $('.player-hand-container .card').width()
+      endLeftPos = $('.player-hand-container .card').last().offset().left + $('.player-hand-container .card').outerWidth(true)
       endTopPos = $('.player-hand-container .card').last().offset().top
 
       deck = @model.get('deck')
@@ -49,6 +49,30 @@ class window.AppView extends Backbone.View
           @remove())
     , @)
 
+    @model.get('dealerHand').on('willHit',() ->
+      startLeftPos = $('.deck .card').last().offset().left
+      startTopPos = $('.deck .card').last().offset().top
+
+      endLeftPos = $('.dealer-hand-container .card').last().offset().left + $('.dealer-hand-container .card').outerWidth(true)
+      endTopPos = $('.dealer-hand-container .card').last().offset().top
+
+      deck = @model.get('deck')
+      cardView = new CardView(model: deck.at(deck.length - 1))
+      @$el.append(cardView.el)
+      context = @
+      cardView.$el.css(
+        'position': 'absolute'
+        'top': startTopPos
+        'left' : startLeftPos
+        ).animate(
+        'top': endTopPos
+        'left' : endLeftPos
+        , 600
+        , "linear"
+        , () ->
+          context.model.get('dealerHand').cardArrived()
+          @remove())
+    , @)
 
   render: ->
     @$el.children().detach()
